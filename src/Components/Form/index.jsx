@@ -13,10 +13,11 @@ const validateMessages = {
     },
 };
 
-const RegistrationForm = () => {
+const RegistrationForm = (props) => {
     const onFinish = (values) => {
         console.log(values);
     };
+    console.log({ props });
 
     return (
         <div className="registration-form">

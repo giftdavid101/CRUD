@@ -12,11 +12,12 @@ function App() {
     return (
         <div className="App">
             <Header />
-            <Switch>
-                <Route path="/" component={RegistrationForm} />
-                <Route path="/details" component={Details} />
-            </Switch>
-
+            <div className="app-children">
+                <Switch>
+                    <Route path="/" component={RegistrationForm} />
+                    <Route path="/details" component={Details} />
+                </Switch>
+            </div>
             <Footer />
         </div>
     );
