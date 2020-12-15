@@ -1,67 +1,42 @@
-import React from 'react';
-import { Form, Input, Button } from 'antd';
+import React, { useState } from 'react';
+import { Button } from 'antd';
 import './form.style.css';
+import RFInput from '../elements/input';
 
-const validateMessages = {
-    required: '${label} is required!',
-    types: {
-        email: '${label} is not a valid email!',
-        number: '${label} is not a valid number!',
-    },
-    number: {
-        range: '${label} must be between ${min} and ${max}',
-    },
-};
+const RegistrationForm = () => {
+    const [values, setValues] = useState({});
 
-const RegistrationForm = (props) => {
-    const onFinish = (values) => {
-        console.log(values);
+    const handleChange = (event) => {
+        setValues({ ...values, [event.target.name]: event.target.value });
     };
-    console.log({ props });
+
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        const { fname, lname, email, phone } = values;
+        if (!fname && !lname && !email && !phone) {
+            alert('Some required fields are missing values');
+            return;
+        }
+        let oldValues = localStorage.getItem('regForm') || '[]';
+        oldValues = JSON.parse(oldValues);
+        console.log(oldValues);
+        const dataUpdate = [...oldValues, values];
+        // const dataUpdate = Array.from(oldValues).concat(values);
+        localStorage.setItem('regForm', JSON.stringify(dataUpdate));
+    };
 
     return (
         <div className="registration-form">
             <div className="form-container container">
-                <Form name="nest-messages" onFinish={onFinish} validateMessages={validateMessages}>
-                    <Form.Item
-                        name={['user', 'fname']}
-                        label="First Name"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}>
-                        <Input />
-                    </Form.Item>{' '}
-                    <Form.Item
-                        name={['user', 'lname']}
-                        label="Last Name"
-                        rules={[
-                            {
-                                required: true,
-                            },
-                        ]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item
-                        name={['user', 'email']}
-                        label="Email"
-                        rules={[
-                            {
-                                type: 'email',
-                            },
-                        ]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item name={['user', 'phoneNo']} label="Phone Number" rules={[{ type: 'number', max: 11 }]}>
-                        <Input />
-                    </Form.Item>
-                    <Form.Item>
-                        <Button type="primary" htmlType="submit">
-                            Submit
-                        </Button>
-                    </Form.Item>
-                </Form>
+                <form onSubmit={handleSubmit}>
+                    <RFInput label={'first name'} name={'fname'} onChange={handleChange} />
+                    <RFInput label={'last name'} name={'lname'} onChange={handleChange} />
+                    <RFInput label={'email'} name={'email'} onChange={handleChange} />
+                    <RFInput label={'phone number'} name={'phone'} onChange={handleChange} />
+                    <Button htmlType={'submit'} type={'primary'}>
+                        Submit
+                    </Button>
+                </form>
             </div>
         </div>
     );
