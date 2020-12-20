@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Button } from 'antd';
 import './form.style.css';
 import RFInput from '../elements/input';
+import { v4 as uuidv4 } from 'uuid';
 
 const RegistrationForm = () => {
     const [values, setValues] = useState({});
@@ -19,9 +20,10 @@ const RegistrationForm = () => {
         }
         let oldValues = localStorage.getItem('regForm') || '[]';
         oldValues = JSON.parse(oldValues);
-        console.log(oldValues);
-        const dataUpdate = [...oldValues, values];
+        // values.id = uuidv4()
+        const dataUpdate = [...oldValues, { ...values, id: uuidv4(), reg_date: new Date().toUTCString() }];
         // const dataUpdate = Array.from(oldValues).concat(values);
+        console.log(dataUpdate);
         localStorage.setItem('regForm', JSON.stringify(dataUpdate));
     };
 
