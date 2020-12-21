@@ -1,0 +1,11 @@
+.header {
+  background: gray;
+  height: 60px;
+}
+.header__header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*# sourceMappingURL=header.style.css.map */
