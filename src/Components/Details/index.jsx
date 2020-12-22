@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { notification } from 'antd';
 
 let DetailsItem = ({ id, fname, handleDelete, handleSave }) => {
@@ -57,10 +57,6 @@ const Details = () => {
         setDetails(JSON.parse(oldValues));
     }, []);
 
-    //80 for the JS 80/100
-    // 10 for the UI 10/ 100
-    // user experience - poor
-
     const handleDelete = (id) => {
         const filtered = details.filter((detail) => detail.id !== id);
         setDetails(filtered);
@@ -77,13 +73,12 @@ const Details = () => {
             } else {
                 lastUpdate.push(detail);
             }
+
+            console.log({ lastUpdate });
+            setDetails(lastUpdate);
+            localStorage.setItem('regForm', JSON.stringify(lastUpdate));
         }
-
-        console.log({ lastUpdate });
-        setDetails(lastUpdate);
-        localStorage.setItem('regForm', JSON.stringify(lastUpdate));
     };
-
     return (
         <div>
             {details.length > 0

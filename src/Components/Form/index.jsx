@@ -25,8 +25,8 @@ const RegistrationForm = () => {
         event.preventDefault();
         const { fname, lname, email, phone } = values;
 
-        if (!fname && !lname && !email && !phone) {
-            openNotification();
+        if (!fname || !lname || !email || !phone) {
+            alert('all fields are required');
         } else {
             alert('Details are submitted. Click details to view your data');
         }
