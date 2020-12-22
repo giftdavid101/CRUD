@@ -12,17 +12,19 @@ let DetailsItem = ({ id, fname, handleDelete, handleSave }) => {
 
     const _handleSave = (id) => {
         const update = editRef.current.textContent;
+
         if (update) {
             handleSave({ id, fname: update });
             setEditing(false);
             editRef.current.contentEditable = false;
-            update;
         } else {
             notification.open({
                 message: 'Empty Field',
                 description: 'Cannot leave field blank',
             });
+            editRef.current.textContent = fname;
         }
+        console.log(update);
     };
 
     return (
@@ -76,21 +78,6 @@ const Details = () => {
                 lastUpdate.push(detail);
             }
         }
-
-        // const filAns = [1, 2, 3, 4, 5].filter((curValue, i, arr) => curValue % 2 == 0);
-        // const mapAns = [1, 2, 3, 4, 5].map((curValue, i, arr) => curValue * 2);
-        // [1, 2, 3, 4, 5].forEach((curValue, i, arr) => curValue * 2);
-
-        // const updatedData = details.reduce((resolve, detail, i, arr) => {
-        //     if (detail.id === update.id) detail.fname = update.fname;
-        //     resolve.push(detail);
-        //     return resolve;
-        // }, []);
-
-        // const ans = [1, 2, 3, 4, 5].reduce((initialSum, curNumber) => {
-        //     initialSum += curNumber;
-        //     return initialSum;
-        // }, 0);
 
         console.log({ lastUpdate });
         setDetails(lastUpdate);

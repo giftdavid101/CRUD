@@ -6,7 +6,7 @@ const RFInput = (props) => {
     return (
         <div className={'rf-input'}>
             {props.label && props.label.trim() ? <label htmlFor={props.name}>{props.label + ':'}</label> : null}
-            <Input id={props.name} {...props} />
+            <Input id={props.name} {...props} required />
         </div>
     );
 };
