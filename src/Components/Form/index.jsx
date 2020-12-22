@@ -2,20 +2,10 @@ import React, { useState } from 'react';
 import './form.style.css';
 import RFInput from '../elements/input';
 import { v4 as uuidv4 } from 'uuid';
-import { Button, notification } from 'antd';
+import { Button } from 'antd';
 
 const RegistrationForm = () => {
     const [values, setValues] = useState({});
-
-    const openNotification = () => {
-        notification.open({
-            message: 'Missing Input Fields',
-            description: 'Please fill in all the your details',
-            onClick: () => {
-                console.log('Notification Clicked!');
-            },
-        });
-    };
 
     const handleChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
